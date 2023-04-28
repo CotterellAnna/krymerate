@@ -9,9 +9,9 @@ const session = require("express-session");
 const { log } = require("console");
 const http = require("http");
 const port = process.env.PORT || 5000;
-const server = http.createServer(app);
 
 const app = express();
+const server = http.createServer(app);
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs")
