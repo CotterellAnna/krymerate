@@ -7,6 +7,8 @@ const _ = require("lodash");
 const encrypt = require("mongoose-encryption");
 const session = require("express-session");
 const { log } = require("console");
+const http = require("http");
+const { hostname } = require("os");
 const port = process.env.PORT || 5000;
 const server = http.createServer(app);
 
@@ -1408,6 +1410,6 @@ app.get("/admin/logout", function(req,res){
     req.session.loggedIn = false;
     res.redirect("/admin/login");
 })
-server.listen(port, function(){
+server.listen(port, hostname:()=>{
     console.log(`Server started on port ${port}`)
 })
