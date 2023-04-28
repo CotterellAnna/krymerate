@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -9,8 +10,15 @@ const session = require("express-session");
 const { log } = require("console");
 const http = require("http");
 const port = process.env.PORT || 5000;
-
+const URI = process.env.MONGODB_URI;
+const apiKey = process.env.GOOGLE_MAPS_API_KEY;
 const app = express();
+
+
+app.get("/api_key", function(req, res){
+    res.send({key: apiKey})
+})
+
 const server = http.createServer(app);
 
 app.set("views", path.join(__dirname, "views"));
@@ -29,7 +37,7 @@ app.use(session({
 
 
 
-mongoose.connect("mongodb+srv://cotterellanna:theCrimeLocationApiDB@crime-location.gtjbxso.mongodb.net/locationCrimeDB?retryWrites=true&w=majority")
+mongoose.connect(URI)
     .then(console.log("Connected to mongoDB"))
     .catch(err=>console.log("this "+ err));
 

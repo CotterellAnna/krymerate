@@ -17,7 +17,15 @@ let modalBtn = document.getElementById("modalBtn");
 let crime_rate_icon = document.getElementById("crime_rate_icon");
 let modal_title = document.getElementById("modal_title");
 
-const apiKey = `AIzaSyB0nXfRO2Xh1J1Q4OUFjD86XbdXo4-4fBA`;
+async function getApiKey() {
+  try {
+    const response = await fetch('/api_key');
+    const data = await response.json();
+    return data.key;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 // show notification modal on getting the crime_info 
 modalBtn.addEventListener("click", ()=>{});
@@ -81,7 +89,9 @@ location_form.addEventListener("submit", function(e){
     show(e);
   });
   location_name = location_input.value;
-  fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location_name}&key=${apiKey}`)
+  getApiKey().then((apiKey) => {
+    // Do something with the apiKey
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location_name}&key=${apiKey}`)
     .then(res =>{
       return res.json();
     })
@@ -110,6 +120,7 @@ location_form.addEventListener("submit", function(e){
       
       displayMap(pos);
     })
+  });
 });
 
 // for users live location
@@ -125,7 +136,9 @@ function find_location_map(){
         
         displayMap(pos)
 
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`)
+        getApiKey().then((apiKey) => {
+          // Do something with the apiKey
+          fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`)
           .then(res =>{
             return res.json()
           })
@@ -149,6 +162,7 @@ function find_location_map(){
             location_name = data["results"][0].formatted_address;
             location_input.setAttribute("value", location_name)
           })
+        });
       },
       () => {
         handleLocationError(true, infoWindow, map.getCenter());
