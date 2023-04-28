@@ -1,0 +1,155 @@
+<div class="container-fluid px-0 m-0 mb-3 px-lg-5">
+    <div class="my-3 px-3 px-lg-0" id="crime_stats">
+        <h5 class="d-md-none fw-bold">Crime Stats</h5>
+        <!-- crime stats summary container starts -->
+        <div class="container-fluid d-flex flex-row justify-content-between align-items-center overflow-scroll p-0" id="crime_info_container">
+            <!-- crimes committed card starts -->
+            <div class="container-fluid crime_card ms-0 me-2 p-3 position-relative">
+                <div>
+                    <img src="/images/icon.svg" alt="">
+                </div>
+                <div class="row row-cols-1 position-absolute bottom-0 ps-2 mb-3">
+                    <div class="col fw-bold fs-4" id="total_crimes_committed">
+                        
+                    </div>
+                    <div class="col crime_stats">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="col text-secondary">
+                        Crimes committed
+                    </div>
+                </div>
+          </div>
+          <!-- crimes committed card ends -->
+          <!-- crime rating card starts -->
+          <div class="container-fluid crime_card ms-0 me-2 p-3 position-relative">
+                <div>
+                    <img src="/images/icon.svg" alt="">
+                </div>
+                <div class="row row-cols-1 position-absolute bottom-0 ps-2 mb-3">
+                    <div class="col fw-bold fs-4" id="crime_rating">
+                        
+                    </div>
+                    <div class="col crime_stats">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="col text-secondary">
+                        Crime rating
+                    </div>
+                </div>
+          </div>
+          <!-- crime rating card ends -->
+          <!-- Highest crime card starts -->
+          <div class="container-fluid crime_card ms-0 me-2 p-3 position-relative">
+                <div>
+                    <img src="/images/icon.svg" alt="">
+                </div>
+                <div class="row row-cols-1 position-absolute bottom-0 ps-2 mb-3">
+                    <div class="col fw-bold fs-4 highest_crime">
+                        
+                    </div>
+                    <div class="col crime_stats">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="col text-secondary">
+                        Most criminal cases
+                    </div>
+                </div>
+          </div>
+          <!-- Highest crime card ends -->
+          <!-- Lowest crime card starts -->
+          <div class="container-fluid crime_card ms-0 me-2 p-3 position-relative">
+                <div>
+                    <img src="/images/icon.svg" alt="">
+                </div>
+                <div class="row row-cols-1 position-absolute bottom-0 ps-2 mb-3">
+                    <div class="col fw-bold fs-4" id="least_crime">
+                        
+                    </div>
+                    <div class="col crime_stats">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="col text-secondary">
+                        Least criminal cases
+                    </div>
+                </div>
+          </div>
+          <!-- Lowest crime card ends -->
+        </div>
+        <!-- crime stats summary container ends -->
+    </div>
+    <div class="container-fluid px-3 px-lg-0 d-flex flex-column flex-lg-row justify-content-between" id="map_info_container">
+        <!-- interactive map starts -->
+        <div class="container-fluid px-0 m-0 mb-4 mb-lg-0 me-lg-3" >
+            <h5 class="d-lg-none fw-bold">Map</h5>
+            <div class="container-fluid d-flex justify-content-center align-items-center" id="interactive_map_container">
+                <div class="spinner-border" role="status" id="map_loader">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <!-- interactive map ends -->
+        <!-- crimes container starts -->
+        <div class="container-fluid px-0">
+            <h5 class="d-lg-none fw-bold">Crime Rate Info: <span class="location_name" class="text-dark"></span></h5>
+            <div class="container-fluid me-0 py-3 d-flex align-items-end position-relative" id="crime_rate_info_container">
+                <!-- loader starts -->
+                <div class="crime_stats position-relative align-self-center start-50">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <!-- loader ends -->
+                <!-- failed to find location crime details container starts -->
+                <div class="container-fluid p-3 m-0 text-center" id="no_data_container">
+                    <img src="/images/oops.svg" alt="no crime activity" class="img-fluid">
+                    <div class="container-fluid py-2">
+                        <h6>Oops, unable to fetch crime information for this location</h6>
+                    </div>
+                </div>
+                <!-- failed to find location crime details container ends -->
+                <!-- crime rate chart starts -->
+                <div class="container-fluid m-0 p-0" id="crime_chart_container">
+                    <h5 class="position-absolute top-0 py-3 d-none d-lg-block" style="color: #2563EB;">Crime Rate Info: <span class="location_name" class="text-dark"></span></h5>
+                    <canvas id="crime_chart"></canvas>
+                </div>
+                <!-- crime rate chart ends -->
+            </div>
+        </div>
+        <!-- crimes container ends -->
+    </div>
+</div>
+
+<!-- modal -->
+<button type="button" class="btn btn-primary visually-hidden" data-bs-toggle="modal" data-bs-target="#notificationModal" id="modalBtn">
+    Launch demo modal
+</button>
+<div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="width: fit-content;">
+        <div class="modal-header border-0">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-0 px-4 text-center">
+            <img src="" alt="crime rate" id="crime_rate_icon">
+            <h5 id="modal_title"></h5>
+            <div>
+                <span class="location_name"></span> has <span class="highest_crime_count text-primary"></span> records of <span class="highest_crime"></span>. <br>
+                Stay alert as you could exposed to this menance. <br>
+                Stay safe!
+            </div>
+        </div>
+        <div class="modal-footer mb-3 justify-content-center border-0">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Show full crime details</button>
+        </div>
+    </div>
+    </div>
+</div>

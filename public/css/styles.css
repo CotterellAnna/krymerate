@@ -1,0 +1,110 @@
+body{
+    min-height: 100vh;
+    background: #EEEEEE;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#nav_header_container{
+    background-image:
+    linear-gradient(87.27deg, #1F2125 10.21%, rgba(31, 33, 37, 0.4) 72.32%, rgba(217, 217, 217, 0)98.04%),
+    url("../images/static_map.png");
+    background-size: cover;
+}
+
+.btn-primary{
+    background-color: #2563EB;
+}
+
+#crime_info_container::-webkit-scrollbar {
+    display: none;
+}
+
+.crime_card{
+    /* background-image: url("../images/crime_1.svg"); */
+    background-color: white;
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 9rem;
+    min-width: 16rem;
+    max-width: 17rem;
+    border-radius: 7px;
+}
+
+#interactive_map_container{
+    background-image: url("../images/interactive_map_bg.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 7px;
+    min-height: 50vh;
+    width: 100%;
+}
+
+#crime_rate_info_container{
+    /* background-image: url("../images/crime_rate_info_bg.svg"); */
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
+    border-radius: 7px;
+    min-height: 50vh;
+    width: 100%;
+}
+
+
+footer{
+    background: #1F2125;
+}
+
+#no_data_container, #crime_chart_container{
+    display: none;
+}
+
+canvas {
+  width: 500px;
+  height: 300px;
+}
+
+@media only screen and  (min-width: 768px) {
+    #nav_header_container{
+        background-image:
+        linear-gradient(87.27deg, #1F2125 10.21%, rgba(31, 33, 37, 0.4) 72.32%, rgba(217, 217, 217, 0)98.04%),
+        url("../images/desktop_static_map.png");
+        min-height: 230px;
+    }
+
+    #title{
+        font-size: 1.2rem;
+    }
+
+    #location_form{
+        width: 60%;
+    }
+
+    #crime_stats{
+        position: relative;
+        height: 7rem;
+    }
+
+    #crime_info_container{
+        position: absolute;
+        top: -2.6rem;
+    }
+
+    #admin_login_form{
+        min-width: 25rem;
+        max-width: 30%;
+    }
+}
+
+@media only screen and  (min-width: 992px){
+    #interactive_map_container{
+        min-height: 50vh;
+        width: 55vw;
+    }
+    #crime_rate_info_container{
+        min-height: 50vh;
+        width: 32vw;
+    }
+}

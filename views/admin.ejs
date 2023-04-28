@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- jQuery datatables CDN -->
+    <link type="text/css" rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <title>Krymerate</title>
+</head>
+<body class="position-relative">
+    <div class="container--fluid px-3 py-2 pb-md-2 px-lg-5 text-white" id="nav_header_container">
+        <nav class="navbar navbar-light mb-1 px-lg-0">
+          <div class="container-fluid p-0 w-auto mx-0">
+            <a class="navbar-brand fw-bold text-white" href="#">
+              <img src="/images/logo.svg" alt="" width="28.68" height="25.65" class="d-inline-block align-text-top">
+              Krymerate
+            </a>
+          </div>
+          <div class="continer-fluid float-right">
+            <buttton class="btn btn-dark fw-bold" id="logout_btn">Logout</buttton>
+          </div>
+        </nav>
+        <div class="container-fluid p-0 pt-1">
+            <div class="row row-cols-1">
+                <div class="col">
+                    <img src="/images/Admin.svg" alt="admin">
+                </div>
+                <div class="col">
+                    <h2 style="font-size: 3rem;">Hi, Admin 👋</h2>
+                </div>
+                <div class="col">
+                    <p>
+                        Welcome to Krymerate, a platform to get detailed report of crime in any region
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid px-0 m-0 mb-3 px-lg-5 w-100">
+        <button class="btn btn-primary col-auto d-block mx-auto mt-3" id="add_new_record_btn" data-bs-toggle="modal" data-bs-target="#new_record_modal">Add New Record</button>
+        <div class="container-fluid px-3 px-lg-0 pt-0">
+            
+            <!-- Datatable -->
+            <table id="table" class="m-0 w-100">
+                <thead>
+                    <tr>
+                      <!-- <th>ID</th> -->
+                      <th>Location</th>
+                      <th>Type</th>
+                      <th>Total Crimes Committed</th>
+                      <th>Crimes (count)</th>
+                      <th>Last updated</th>
+                      <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- table rows will be populated dynamically by DataTables -->
+                </tbody>
+            </table>
+
+            <!-- table loader -->
+            <div class="container-fluid w-100" id="table_loader">
+                <div class="spinner-border d-block mx-auto" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <!-- table loader -->
+        </div>
+
+        <!-- edit form modal begins -->
+        <div class="modal fade" id="form_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Edit Location Form</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" class="row px-3" id="view_edit_form">
+                            <!-- form loader starts -->
+                            <div class="container-fluid" id="edit_form_modal">
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                            <!-- form loader ends -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- edit form modal ends -->
+
+        <!-- new record form modal begins -->
+        <div class="modal fade" id="new_record_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Add New Location Form</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" class="row px-3" id="new_record_form">
+                            <div class="mb-3 col-4">
+                                <label for="locationName" class="form-label">Location Name:</label>
+                                <input type="text" class="form-control" id="locationName" placeholder="">
+                            </div>
+                            <div class="mb-3 col-4">
+                                <label for="locationType" class="form-label">Type:</label>
+                                <input type="text" class="form-control" id="locationType" placeholder="">
+                            </div>
+                            <div class="mb-3 col-4">
+                                <label for="population" class="form-label">Population:</label>
+                                <input type="number" class="form-control" id="locationPopulation" placeholder="">
+                            </div>
+                            <div class="mb-0 crimes">
+                                
+                            </div>
+                            <button type="button" class="btn btn-primary col-auto float-start mx-3 mb-3 add_crime_btn">Add new crime</button>
+                            <hr>
+                            <div class="mb-0 col-12">
+                                <div class="row justify-content-center">
+                                    <button type="button" class="btn btn-secondary col-4 me-2" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary col-4">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- new record form modal ends -->
+    </div>
+    
+    <footer class="container-fluid text-white text-center py-2">
+        Built by Anna Cotterell
+    </footer>
+    <!-- sweet alert JS -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- jQuery datatables JS CDN -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <!-- jQuery UI JS -->
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="/js/admin.js"></script>
+</body>
+</html>
