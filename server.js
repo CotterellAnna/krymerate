@@ -1298,15 +1298,12 @@ app.route("/locations")
         }
     })
 ///////////////////////////////////////////////////////Request for specific location///////////////////////////////////////////////////////
-function searchValue(value) {
-    const pattern = value.replace(/[- ]/g, '[- ]');
-    return { name: { $regex: pattern, $options: 'i' } };
-}
 
 app.route("/location/:locationName")
     .get(function(req, res){
-        const locationName = req.params.locationName
-        Location.findOne({name: searchValue(locationName)})
+        const locationName = req.params.locationName;
+        const regexPattern = new RegExp(locationName.replace(/\s/g, "-"), "i");
+        Location.findOne({name:{ $regex: regexPattern }})
             .then((result)=>{
                 if(result){
                     res.json(result)
