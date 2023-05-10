@@ -313,7 +313,7 @@ function display_crime_info(data){
     if(data.crime_rating == "Low"){
       crime_rate_icon.setAttribute("src", "../images/low_rate.svg");
       modal_title.innerHTML = "Safe";
-    }else if(data.crime_rating == "Mid"){
+    }else if(data.crime_rating == "Medium"){
       crime_rate_icon.setAttribute("src", "../images/mid_rate.svg");
       modal_title.innerHTML = "Relatively Safe";
     }else{
