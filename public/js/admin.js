@@ -269,7 +269,9 @@ $(document).ready(() => {
                     fetch(`/location_id/${id}`, {
                         method:"DELETE"
                     })
-                    .then(res=>{return res.json()})
+                    .then(res=>{
+                        return res.json()
+                    })
                     .then(data=>{
                         if(data.name){
                             $('#table').DataTable().row(row).remove().draw();
@@ -280,6 +282,9 @@ $(document).ready(() => {
                             })
                         }
                     }) 
+                    .catch((err)=>{
+                        console.log(err);
+                    })
                         
                 }
             })
